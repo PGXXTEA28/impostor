@@ -76,7 +76,13 @@
         // --- DATOS ---
         const GAME_DATA = {
             'Cantantes': { 
-                words: ['Bad Bunny', 'Rauw Alejandro', 'Mora', 'Jhayco', 'Feid', 'Anuel AA', 'Ozuna', 'Myke Towers', 'Bryant Myers', 'Young Miko', 'Lunay', 'Chencho Corleone', 'Wisin', 'Yandel', 'Farruko', 'Arcángel'], 
+                words: [
+                    'Bad Bunny', 'Rauw Alejandro', 'Mora', 'Jhayco', 'Feid', 'Anuel AA', 'Ozuna', 'Myke Towers', 
+                    'Bryant Myers', 'Young Miko', 'Lunay', 'Chencho Corleone', 'Wisin', 'Yandel', 'Farruko', 'Arcángel',
+                    'Daddy Yankee', 'Karol G', 'J Balvin', 'Maluma', 'Nicky Jam', 'Don Omar', 'Eladio Carrión', 
+                    'Sech', 'Cris Mj', 'De La Ghetto', 'Ñengo Flow', 'Jowell & Randy', 'Tego Calderón', 'Zion & Lennox', 
+                    'Rosalía', 'Natti Natasha', 'Becky G', 'Duki'
+                ], 
                 hints: ['Género Urbano', 'Reggaetón', 'Artista Top', 'Música Latina', 'Trap', 'Perreo'] 
             },
             'Animales': { words: ['León', 'Pingüino', 'Elefante', 'Jirafa', 'Delfín', 'Águila', 'Koala', 'Tigre', 'Canguro', 'Oso'], hints: ['Reino Animal', 'Ser vivo', 'Fauna'] },
@@ -115,7 +121,6 @@
             const [impostorIndex, setImpostorIndex] = useState(null);
             const [secretWord, setSecretWord] = useState('');
             const [currentCategoryName, setCurrentCategoryName] = useState('');
-            // CAMBIO 1: Estado inicial es MIX_ALL
             const [selectedCategory, setSelectedCategory] = useState('MIX_ALL');
             const [customWord, setCustomWord] = useState('');
             const [customHint, setCustomHint] = useState('');
@@ -158,14 +163,12 @@
                 setCurrentPlayerIndex(0); setIsWordVisible(false); setPhase('pass');
             };
 
-            // CAMBIO 2: Función para el botón de atrás
             const handleBack = () => {
                 if (editingNames) {
                     setEditingNames(false);
                 } else if (phase === 'setup') {
                     setPhase('home');
                 } else {
-                    // Si está en juego, vuelve al home (reset)
                     setPhase('home');
                 }
             };
@@ -175,7 +178,6 @@
                     <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-40 pointer-events-none"></div>
                     <div className="absolute bottom-[10%] right-[-10%] w-72 h-72 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-40 pointer-events-none"></div>
                     
-                    {/* BOTÓN ATRÁS DISCRETO (Solo si no estamos en home) */}
                     {phase !== 'home' && (
                         <button 
                             onClick={handleBack} 
