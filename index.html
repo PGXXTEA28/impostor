@@ -17,6 +17,7 @@
                     animation: {
                         'blob': "blob 7s infinite",
                         'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'slide-up': 'slideUp 0.3s ease-out forwards',
                         'bounce-in': 'bounceIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
                     },
                     keyframes: {
@@ -27,8 +28,12 @@
                             "100%": { transform: "translate(0px, 0px) scale(1)" },
                         },
                         fadeIn: {
-                            from: { opacity: 0, transform: 'translateY(10px)' },
-                            to: { opacity: 1, transform: 'translateY(0)' }
+                            from: { opacity: 0 },
+                            to: { opacity: 1 }
+                        },
+                        slideUp: {
+                            from: { transform: 'translateY(100%)' },
+                            to: { transform: 'translateY(0)' }
                         },
                         bounceIn: {
                             '0%': { transform: 'scale(0.9)', opacity: 0 },
@@ -56,6 +61,8 @@
         const Icon = ({ path, className, size = 24 }) => (
             <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>{path}</svg>
         );
+        
+        // Iconos ampliados para las categorías
         const Icons = {
             Users: (p) => <Icon path={<><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></>} {...p} />,
             Play: (p) => <Icon path={<polygon points="5 3 19 12 5 21 5 3"/>} {...p} />,
@@ -67,17 +74,30 @@
             ChevronLeft: (p) => <Icon path={<path d="m15 18-6-6 6-6"/>} {...p} />,
             Plus: (p) => <Icon path={<><path d="M5 12h14"/><path d="M12 5v14"/></>} {...p} />,
             Minus: (p) => <Icon path={<path d="M5 12h14"/>} {...p} />,
-            Info: (p) => <Icon path={<><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></>} {...p} />,
-            Grid: (p) => <Icon path={<><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></>} {...p} />,
             Shuffle: (p) => <Icon path={<><path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l14.2-12.6"/><path d="M22 18h-1.4c-1.3 0-2.5-.6-3.3-1.7L3.1 3.7"/><path d="M2 6h1.4c1.3 0 2.5.6 3.3 1.7l1.4 1.2"/><path d="M22 6h-1.4c-1.3 0-2.5.6-3.3 1.7l-1.4 1.2"/></>} {...p} />,
             Message: (p) => <Icon path={<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>} {...p} />,
             Trash: (p) => <Icon path={<><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></>} {...p} />,
-            Mask: (p) => <Icon path={<path d="M2 12a5 5 0 0 0 5 5 8 8 0 0 1 5 2 8 8 0 0 1 5-2 5 5 0 0 0 5-5V7h-5a8 8 0 0 0-5 2 8 8 0 0 0-5-2H2Z"/>} {...p} />
+            Close: (p) => <Icon path={<path d="M18 6 6 18M6 6l12 12"/>} {...p} />,
+            Check: (p) => <Icon path={<path d="M20 6 9 17l-5-5"/>} {...p} />,
+            // Categorías
+            Music: (p) => <Icon path={<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>} {...p} />,
+            Paw: (p) => <Icon path={<path d="M12 2a3 3 0 0 0-3 3v7h6V5a3 3 0 0 0-3-3ZM2.7 10.3a3 3 0 1 0 .6 5.8l2.6.4v-3.7l-3.2-2.5ZM21.3 10.3l-3.2 2.5v3.7l2.6-.4a3 3 0 1 0 .6-5.8Z"/>} {...p} />, // Aproximado
+            Pizza: (p) => <Icon path={<path d="M15 11h.01"/><path d="M11 15h.01"/><path d="M16.5 13h.01"/><path d="M3 21.3a19 19 0 0 0 18 0l-9-19-9 19Z"/>} {...p} />,
+            MapPin: (p) => <Icon path={<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/>} {...p} />,
+            Package: (p) => <Icon path={<path d="m16.5 9.4-9-5.19M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>} {...p} />,
+            Trophy: (p) => <Icon path={<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>} {...p} />,
+            Briefcase: (p) => <Icon path={<rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>} {...p} />,
+            Car: (p) => <Icon path={<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>} {...p} />,
+            Shirt: (p) => <Icon path={<path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/>} {...p} />,
+            Film: (p) => <Icon path={<rect width="20" height="20" x="2" y="2" rx="2.18" ry="2.18"/><line x1="7" x2="7" y1="2" y2="22"/><line x1="17" x2="17" y1="2" y2="22"/><line x1="2" x2="22" y1="12" y2="12"/><line x1="2" x2="7" y1="7" y2="7"/><line x1="2" x2="7" y1="17" y2="17"/><line x1="17" x2="22" y1="17" y2="17"/><line x1="17" x2="22" y1="7" y2="7"/>} {...p} />,
+            Heart: (p) => <Icon path={<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>} {...p} />,
+            Zap: (p) => <Icon path={<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>} {...p} />
         };
 
         // --- DATOS AMPLIADOS ---
         const GAME_DATA = {
             'Cantantes': { 
+                icon: Icons.Music,
                 words: [
                     'Bad Bunny', 'Rauw Alejandro', 'Mora', 'Jhayco', 'Feid', 'Anuel AA', 'Ozuna', 'Myke Towers', 
                     'Bryant Myers', 'Young Miko', 'Lunay', 'Chencho Corleone', 'Wisin', 'Yandel', 'Farruko', 'Arcángel',
@@ -88,6 +108,7 @@
                 hints: ['Género Urbano', 'Reggaetón', 'Artista Top', 'Música Latina', 'Trap', 'Perreo'] 
             },
             'Animales': { 
+                icon: Icons.Paw,
                 words: [
                     'León', 'Pingüino', 'Elefante', 'Jirafa', 'Delfín', 'Águila', 'Koala', 'Tigre', 'Canguro', 'Oso',
                     'Lobo', 'Zorro', 'Ballena', 'Serpiente', 'Caballo', 'Perro', 'Gato', 'Ratón', 'Mono', 'Cocodrilo',
@@ -96,6 +117,7 @@
                 hints: ['Reino Animal', 'Ser vivo', 'Fauna', 'Bestia'] 
             },
             'Comida': { 
+                icon: Icons.Pizza,
                 words: [
                     'Pizza', 'Sushi', 'Hamburguesa', 'Tacos', 'Paella', 'Helado', 'Chocolate', 'Ensalada',
                     'Espaguetis', 'Sopa', 'Tarta', 'Fruta', 'Queso', 'Pan', 'Huevo', 'Pollo', 'Pescado', 'Arroz',
@@ -104,6 +126,7 @@
                 hints: ['Gastronomía', 'Alimento', 'Comestible', 'Nutrición'] 
             },
             'Lugares': { 
+                icon: Icons.MapPin,
                 words: [
                     'Playa', 'Hospital', 'Escuela', 'Cine', 'Biblioteca', 'Aeropuerto', 'Gimnasio', 'Parque',
                     'Supermercado', 'Museo', 'Restaurante', 'Estadio', 'Iglesia', 'Banco', 'Hotel', 'Farmacia',
@@ -112,6 +135,7 @@
                 hints: ['Ubicación', 'Sitio público', 'Lugar'] 
             },
             'Objetos': { 
+                icon: Icons.Package,
                 words: [
                     'Teléfono', 'Reloj', 'Zapatos', 'Gafas', 'Llave', 'Mochila', 'Ordenador', 'Botella',
                     'Bolígrafo', 'Cuaderno', 'Silla', 'Mesa', 'Cama', 'Lámpara', 'Espejo', 'Peine', 'Cepillo',
@@ -120,6 +144,7 @@
                 hints: ['Cosa material', 'Utensilio', 'Herramienta'] 
             },
             'Deportes': { 
+                icon: Icons.Trophy,
                 words: [
                     'Fútbol', 'Baloncesto', 'Tenis', 'Natación', 'Boxeo', 'Golf', 'Voleibol', 'Béisbol',
                     'Rugby', 'Ciclismo', 'Atletismo', 'Hockey', 'Esquí', 'Surf', 'Skate', 'Karate', 'Judo',
@@ -128,6 +153,7 @@
                 hints: ['Actividad física', 'Competición', 'Ejercicio'] 
             },
             'Profesiones': { 
+                icon: Icons.Briefcase,
                 words: [
                     'Médico', 'Bombero', 'Policía', 'Profesor', 'Cocinero', 'Astronauta', 'Abogado', 'Ingeniero',
                     'Mecánico', 'Peluquero', 'Actor', 'Cantante', 'Pintor', 'Escritor', 'Jardinero', 'Carpintero',
@@ -136,6 +162,7 @@
                 hints: ['Trabajo', 'Ocupación', 'Empleo'] 
             },
             'Vehículos': { 
+                icon: Icons.Car,
                 words: [
                     'Coche', 'Avión', 'Barco', 'Bicicleta', 'Tren', 'Helicóptero', 'Moto', 'Autobús',
                     'Camión', 'Furgoneta', 'Submarino', 'Cohete', 'Taxi', 'Patinete', 'Tractor', 'Ambulancia',
@@ -144,6 +171,7 @@
                 hints: ['Transporte', 'Motor', 'Movilidad'] 
             },
             'Ropa': { 
+                icon: Icons.Shirt,
                 words: [
                     'Camiseta', 'Pantalón', 'Vestido', 'Abrigo', 'Sombrero', 'Calcetines', 'Zapatillas',
                     'Bufanda', 'Guantes', 'Chaqueta', 'Falda', 'Camisa', 'Traje', 'Bañador', 'Pijama',
@@ -152,6 +180,7 @@
                 hints: ['Vestimenta', 'Moda', 'Atuendo'] 
             },
             'Cine': { 
+                icon: Icons.Film,
                 words: [
                     'Titanic', 'Star Wars', 'Harry Potter', 'El Rey León', 'Avatar', 'Avengers', 'Spiderman',
                     'Batman', 'Jurassic Park', 'Toy Story', 'Frozen', 'El Padrino', 'Matrix', 'Shrek',
@@ -160,6 +189,7 @@
                 hints: ['Película', 'Séptimo Arte', 'Cine'] 
             },
             'Cuerpo': { 
+                icon: Icons.Heart,
                 words: [
                     'Ojo', 'Mano', 'Corazón', 'Cerebro', 'Pie', 'Nariz', 'Boca', 'Oreja', 'Pelo',
                     'Dedo', 'Brazo', 'Pierna', 'Rodilla', 'Codo', 'Estómago', 'Pulmón', 'Diente',
@@ -191,13 +221,15 @@
             const [players, setPlayers] = useState(4);
             const [impostorCount, setImpostorCount] = useState(1);
             const [playerNames, setPlayerNames] = useState(['Jugador 1', 'Jugador 2', 'Jugador 3', 'Jugador 4']);
-            
-            // Ahora manejamos un array de impostores
             const [impostorIndices, setImpostorIndices] = useState([]);
             
             const [secretWord, setSecretWord] = useState('');
             const [currentCategoryName, setCurrentCategoryName] = useState('');
             const [selectedCategory, setSelectedCategory] = useState('MIX_ALL');
+            
+            // Estado para el modal de categorías
+            const [showCategoryModal, setShowCategoryModal] = useState(false);
+
             const [customWord, setCustomWord] = useState('');
             const [customHint, setCustomHint] = useState('');
             const [isCustomWord, setIsCustomWord] = useState(false);
@@ -207,7 +239,7 @@
             const [editingNames, setEditingNames] = useState(false);
             const [starterIndex, setStarterIndex] = useState(null);
 
-            // Asegurar que el número de impostores es válido al cambiar jugadores
+            // Efectos
             useEffect(() => {
                 const maxImpostors = Math.max(1, Math.floor((players - 1) / 2));
                 if (impostorCount > maxImpostors) {
@@ -215,6 +247,7 @@
                 }
             }, [players]);
 
+            // Handlers
             const handlePlayerCountChange = (increment) => {
                 const newCount = players + increment;
                 if (newCount < 3 || newCount > 20) return;
@@ -227,14 +260,13 @@
 
             const handleImpostorCountChange = (increment) => {
                 const newCount = impostorCount + increment;
-                // Máximo impostores: la mitad de los jugadores (para que el juego tenga sentido)
                 const maxImpostors = Math.max(1, Math.floor((players - 1) / 1.5)); 
                 if (newCount < 1 || newCount > maxImpostors) return;
                 setImpostorCount(newCount);
             };
 
             const removePlayer = (indexToRemove) => {
-                if (players <= 3) return; // Mínimo 3 jugadores
+                if (players <= 3) return;
                 const newNames = playerNames.filter((_, idx) => idx !== indexToRemove);
                 setPlayerNames(newNames);
                 setPlayers(prev => prev - 1);
@@ -260,13 +292,11 @@
                 }
                 setSecretWord(word); setCurrentCategoryName(cat); setImpostorHint(hint);
                 
-                // Generar múltiples impostores únicos
                 const newImpostorIndices = new Set();
                 while(newImpostorIndices.size < impostorCount) {
                     newImpostorIndices.add(Math.floor(Math.random() * players));
                 }
                 setImpostorIndices(Array.from(newImpostorIndices));
-                
                 setStarterIndex(Math.floor(Math.random() * players));
                 setCurrentPlayerIndex(0); setIsWordVisible(false); setPhase('pass');
             };
@@ -274,27 +304,79 @@
             const handleBack = () => {
                 if (editingNames) {
                     setEditingNames(false);
+                } else if (phase === 'setup') {
+                    setPhase('home');
                 } else {
                     setPhase('home');
                 }
             };
 
-            // Helper para saber si el jugador actual es impostor
             const isCurrentImpostor = impostorIndices.includes(currentPlayerIndex);
 
+            // Obtener icono actual
+            const CurrentCategoryIcon = selectedCategory === 'MIX_ALL' 
+                ? Icons.Zap 
+                : (GAME_DATA[selectedCategory] ? GAME_DATA[selectedCategory].icon : Icons.Grid);
+
             return (
-                <div className="max-w-md mx-auto h-[100dvh] p-5 flex flex-col relative overflow-hidden">
+                <div className="max-w-md mx-auto h-[100dvh] p-5 flex flex-col relative overflow-hidden font-sans">
                     <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-40 pointer-events-none"></div>
                     <div className="absolute bottom-[10%] right-[-10%] w-72 h-72 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-40 pointer-events-none"></div>
                     
-                    {phase !== 'home' && (
+                    {phase !== 'home' && !showCategoryModal && (
                         <button 
                             onClick={handleBack} 
-                            className="absolute top-4 left-4 z-50 p-2 rounded-full text-slate-400 hover:bg-white/50 hover:text-slate-700 transition-all active:scale-90"
+                            className="absolute top-4 left-4 z-40 p-2 rounded-full text-slate-400 hover:bg-white/50 hover:text-slate-700 transition-all active:scale-90"
                             title="Volver"
                         >
                             <Icons.ChevronLeft size={28} />
                         </button>
+                    )}
+
+                    {/* MODAL DE CATEGORÍAS */}
+                    {showCategoryModal && (
+                        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-slate-900/40 backdrop-blur-sm p-4 animate-fade-in" onClick={() => setShowCategoryModal(false)}>
+                            <div className="bg-white w-full max-w-md rounded-3xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden animate-slide-up" onClick={e => e.stopPropagation()}>
+                                <div className="p-4 border-b border-slate-100 flex justify-between items-center bg-white sticky top-0 z-10">
+                                    <h3 className="font-black text-xl text-slate-800">Selecciona Categoría</h3>
+                                    <button onClick={() => setShowCategoryModal(false)} className="p-2 bg-slate-100 rounded-full hover:bg-slate-200 transition-colors"><Icons.Close size={20} /></button>
+                                </div>
+                                <div className="overflow-y-auto p-4 custom-scrollbar grid grid-cols-2 gap-3 pb-8">
+                                    {/* Opción MIX */}
+                                    <button 
+                                        onClick={() => { setSelectedCategory('MIX_ALL'); setShowCategoryModal(false); }}
+                                        className={`col-span-2 p-4 rounded-2xl flex items-center gap-4 transition-all ${selectedCategory === 'MIX_ALL' ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg shadow-indigo-200 ring-2 ring-indigo-500 ring-offset-2' : 'bg-slate-50 hover:bg-slate-100 text-slate-700'}`}
+                                    >
+                                        <div className={`p-3 rounded-xl ${selectedCategory === 'MIX_ALL' ? 'bg-white/20' : 'bg-white shadow-sm text-indigo-500'}`}>
+                                            <Icons.Zap size={24} />
+                                        </div>
+                                        <div className="text-left flex-1">
+                                            <p className="font-bold text-lg">Mix Aleatorio</p>
+                                            <p className={`text-xs ${selectedCategory === 'MIX_ALL' ? 'text-white/80' : 'text-slate-400'}`}>¡Todas las palabras!</p>
+                                        </div>
+                                        {selectedCategory === 'MIX_ALL' && <Icons.Check size={20} />}
+                                    </button>
+
+                                    {/* Resto de categorías */}
+                                    {Object.keys(GAME_DATA).map(cat => {
+                                        const CatIcon = GAME_DATA[cat].icon;
+                                        const isSelected = selectedCategory === cat;
+                                        return (
+                                            <button 
+                                                key={cat}
+                                                onClick={() => { setSelectedCategory(cat); setShowCategoryModal(false); }}
+                                                className={`p-3 rounded-2xl flex flex-col items-center gap-2 text-center transition-all border-2 ${isSelected ? 'border-indigo-500 bg-indigo-50 text-indigo-700' : 'border-transparent bg-slate-50 hover:bg-slate-100 text-slate-600'}`}
+                                            >
+                                                <div className={`p-3 rounded-xl mb-1 ${isSelected ? 'bg-indigo-200 text-indigo-700' : 'bg-white shadow-sm text-slate-400'}`}>
+                                                    <CatIcon size={28} />
+                                                </div>
+                                                <span className="font-bold text-sm leading-tight">{cat}</span>
+                                            </button>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                        </div>
                     )}
 
                     <div className="relative z-10 flex-1 flex flex-col h-full">
@@ -359,14 +441,20 @@
                                                         <button onClick={() => handleImpostorCountChange(1)} className="w-8 h-full flex items-center justify-center bg-white rounded-xl shadow-sm"><Icons.Plus size={16} /></button>
                                                     </div>
                                                 </div>
-                                                {/* Selector Categoría (Visual simple) */}
+                                                
+                                                {/* Selector Categoría MEJORADO */}
                                                 <div>
-                                                    <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block text-center">Modo</label>
-                                                    <div className="flex items-center justify-center bg-slate-100 rounded-2xl p-2 h-16">
-                                                        <span className="text-sm font-bold text-indigo-600 text-center leading-tight">
-                                                            {isCustomWord ? "Manual" : (selectedCategory === 'MIX_ALL' ? "Aleatorio" : selectedCategory.substring(0,8)+"..")}
+                                                    <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block text-center">Categoría</label>
+                                                    <button 
+                                                        onClick={() => !isCustomWord && setShowCategoryModal(true)}
+                                                        disabled={isCustomWord}
+                                                        className={`w-full h-16 rounded-2xl flex items-center justify-center gap-2 px-2 transition-all ${isCustomWord ? 'bg-slate-100 opacity-50 cursor-not-allowed' : 'bg-indigo-50 border-2 border-indigo-100 hover:border-indigo-300 text-indigo-700'}`}
+                                                    >
+                                                        {!isCustomWord && <CurrentCategoryIcon size={20} />}
+                                                        <span className="text-sm font-bold truncate">
+                                                            {isCustomWord ? "Manual" : (selectedCategory === 'MIX_ALL' ? "Mix" : selectedCategory)}
                                                         </span>
-                                                    </div>
+                                                    </button>
                                                 </div>
                                             </div>
 
@@ -376,20 +464,16 @@
                                                     <button onClick={() => setIsCustomWord(false)} className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${!isCustomWord ? 'bg-white text-indigo-700 shadow-sm' : 'text-slate-500'}`}>Categorías</button>
                                                     <button onClick={() => setIsCustomWord(true)} className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${isCustomWord ? 'bg-white text-indigo-700 shadow-sm' : 'text-slate-500'}`}>Personalizada</button>
                                                 </div>
-                                                {!isCustomWord ? (
-                                                    <div className="relative">
-                                                        <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} className="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl font-bold appearance-none outline-none text-center text-lg pr-10">
-                                                            <option value="MIX_ALL">🎲 Mix Aleatorio</option>
-                                                            <hr />
-                                                            {Object.keys(GAME_DATA).map(cat => <option key={cat} value={cat}>{cat}</option>)}
-                                                        </select>
-                                                        <div className="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none text-slate-400">{selectedCategory === 'MIX_ALL' ? <Icons.Shuffle size={20} /> : <Icons.Grid size={20} />}</div>
+                                                
+                                                {isCustomWord && (
+                                                    <div className="space-y-3 animate-fade-in">
+                                                        <input type="text" value={customWord} onChange={(e) => setCustomWord(e.target.value)} placeholder="Palabra Secreta" className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-center font-bold outline-none focus:ring-2 focus:ring-indigo-500" />
+                                                        <input type="text" value={customHint} onChange={(e) => setCustomHint(e.target.value)} placeholder="Pista para Impostor" className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-center text-sm outline-none focus:ring-2 focus:ring-indigo-500" />
                                                     </div>
-                                                ) : (
-                                                    <div className="space-y-3">
-                                                        <input type="text" value={customWord} onChange={(e) => setCustomWord(e.target.value)} placeholder="Palabra Secreta" className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-center font-bold outline-none" />
-                                                        <input type="text" value={customHint} onChange={(e) => setCustomHint(e.target.value)} placeholder="Pista para Impostor" className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-center text-sm outline-none" />
-                                                    </div>
+                                                )}
+                                                
+                                                {!isCustomWord && (
+                                                     <p className="text-center text-xs text-slate-400 mt-2">Toca el botón de arriba para cambiar de categoría</p>
                                                 )}
                                             </div>
                                         </div>
