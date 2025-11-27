@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>El Impostor - Juego Completo</title>
 
-    <meta name="google-site-verification" content="vMyTCcHy-4h3NrMkKNY3QwQX7hIm59J7tLQHuFGIXZg" />
+    <meta name="google-site-verification" content="XD9N6O9JIa2LjTxxkkaT40nbmQguHH-fDrJtao0bdPw" />
+    
     <meta name="description" content="Juega a 'El Impostor' online gratis con amigos. Adivina la palabra secreta, debate y descubre a los mentirosos. El mejor party game para móvil.">
     <meta name="keywords" content="juego impostor, palabra secreta, juego social, jugar con amigos online, party game, deducción">
 
@@ -120,7 +121,6 @@
             Heart: (p) => <Icon path={<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>} {...p} />
         };
 
-        // --- DATOS REVISADOS (PISTAS GENÉRICAS Y VÁLIDAS PARA TODOS) ---
         const GAME_DATA = {
             'Cantantes': { 
                 icon: Icons.Music,
@@ -250,7 +250,7 @@
             const [secretWord, setSecretWord] = useState('');
             const [currentCategoryName, setCurrentCategoryName] = useState('');
             const [selectedCategory, setSelectedCategory] = useState('MIX_ALL');
-            const [useHints, setUseHints] = useState(true); // NUEVO ESTADO: PISTAS SÍ/NO
+            const [useHints, setUseHints] = useState(true); 
             
             const [showCategoryModal, setShowCategoryModal] = useState(false);
 
