@@ -10,6 +10,8 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8005495548658117" crossorigin="anonymous"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -66,8 +68,8 @@
 
         // --- COMPONENTE DE PUBLICIDAD (PLACEHOLDER) ---
         const AdBlock = ({ type, label }) => {
-            // Este componente simula un anuncio. 
-            // Cuando tengas AdSense, reemplazarías el contenido del <div> por tu código <ins>.
+            // NOTA: Cuando crees los bloques en AdSense, tendrás que sustituir
+            // este div por la etiqueta <ins> con tu data-ad-slot.
             
             let sizeClass = "";
             if (type === "banner") sizeClass = "h-[50px] w-full max-w-[320px]";
@@ -75,7 +77,7 @@
 
             return (
                 <div className={`mx-auto my-4 flex flex-col items-center justify-center border-2 border-dashed border-slate-300 text-slate-400 text-xs font-mono bg-white ad-placeholder rounded-lg overflow-hidden ${sizeClass}`}>
-                    <span className="font-bold text-slate-300 mb-1">PUBLICIDAD</span>
+                    <span className="font-bold text-slate-300 mb-1">ESPACIO ADSENSE</span>
                     <span>{label}</span>
                 </div>
             );
