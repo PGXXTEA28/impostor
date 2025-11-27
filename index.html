@@ -56,7 +56,6 @@
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 10px; }
         
-        /* Estilos para el placeholder de publicidad */
         .ad-placeholder {
             background-image: repeating-linear-gradient(45deg, #f1f5f9 25%, transparent 25%, transparent 75%, #f1f5f9 75%, #f1f5f9), repeating-linear-gradient(45deg, #f1f5f9 25%, #f8fafc 25%, #f8fafc 75%, #f1f5f9 75%, #f1f5f9);
             background-position: 0 0, 10px 10px;
@@ -107,6 +106,7 @@
             Check: (p) => <Icon path={<path d="M20 6 9 17l-5-5"/>} {...p} />,
             Grid: (p) => <Icon path={<><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></>} {...p} />,
             Zap: (p) => <Icon path={<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>} {...p} />,
+            Bulb: (p) => <Icon path={<path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2 1.5-3.5 0-2.2-1.8-4-4-4s-4 1.8-4 4c0 1.5.5 2.5 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/>} {...p} />,
             Music: (p) => <Icon path={<><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></>} {...p} />,
             Paw: (p) => <Icon path={<path d="M12 2a3 3 0 0 0-3 3v7h6V5a3 3 0 0 0-3-3ZM2.7 10.3a3 3 0 1 0 .6 5.8l2.6.4v-3.7l-3.2-2.5ZM21.3 10.3l-3.2 2.5v3.7l2.6-.4a3 3 0 1 0 .6-5.8Z"/>} {...p} />,
             Pizza: (p) => <Icon path={<><path d="M15 11h.01"/><path d="M11 15h.01"/><path d="M16.5 13h.01"/><path d="M3 21.3a19 19 0 0 0 18 0l-9-19-9 19Z"/></>} {...p} />,
@@ -120,6 +120,7 @@
             Heart: (p) => <Icon path={<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>} {...p} />
         };
 
+        // --- DATOS REVISADOS (PISTAS GENÉRICAS Y VÁLIDAS PARA TODOS) ---
         const GAME_DATA = {
             'Cantantes': { 
                 icon: Icons.Music,
@@ -127,10 +128,10 @@
                     'Bad Bunny', 'Rauw Alejandro', 'Mora', 'Jhayco', 'Feid', 'Anuel AA', 'Ozuna', 'Myke Towers', 
                     'Bryant Myers', 'Young Miko', 'Lunay', 'Chencho Corleone', 'Wisin', 'Yandel', 'Farruko', 'Arcángel',
                     'Daddy Yankee', 'Karol G', 'J Balvin', 'Maluma', 'Nicky Jam', 'Don Omar', 'Eladio Carrión', 
-                    'Sech', 'Cris Mj', 'De La Ghetto', 'Ñengo Flow', 'Jowell & Randy', 'Tego Calderón', 'Zion & Lennox', 
-                    'Rosalía', 'Natti Natasha', 'Becky G', 'Duki', 'Quevedo', 'Saiko', 'Shakira', 'Bizarrap'
+                    'Sech', 'Cris Mj', 'De La Ghetto', 'Rosalía', 'Natti Natasha', 'Becky G', 'Duki', 'Quevedo', 
+                    'Saiko', 'Shakira', 'Bizarrap'
                 ], 
-                hints: ['Género Urbano', 'Reggaetón', 'Artista Top', 'Música Latina', 'Trap', 'Perreo'] 
+                hints: ['Estrella Musical', 'Conciertos', 'Top Global', 'Fama Mundial', 'Videoclips', 'Premios Musicales', 'Escenario'] 
             },
             'Animales': { 
                 icon: Icons.Paw,
@@ -139,7 +140,7 @@
                     'Lobo', 'Zorro', 'Ballena', 'Serpiente', 'Caballo', 'Perro', 'Gato', 'Ratón', 'Mono', 'Cocodrilo',
                     'Tiburón', 'Pulpo', 'Medusa', 'Hormiga', 'Abeja', 'Mariposa', 'Búho', 'Cebra', 'Rinoceronte', 'Hipopótamo'
                 ], 
-                hints: ['Reino Animal', 'Ser vivo', 'Fauna', 'Bestia'] 
+                hints: ['Ser vivo', 'Naturaleza', 'Fauna', 'Criatura', 'Reino Animal'] 
             },
             'Comida': { 
                 icon: Icons.Pizza,
@@ -148,7 +149,7 @@
                     'Espaguetis', 'Sopa', 'Tarta', 'Fruta', 'Queso', 'Pan', 'Huevo', 'Pollo', 'Pescado', 'Arroz',
                     'Galletas', 'Patatas Fritas', 'Bocadillo', 'Cereal', 'Yogur', 'Croissant', 'Donut', 'Burrito'
                 ], 
-                hints: ['Gastronomía', 'Alimento', 'Comestible', 'Nutrición'] 
+                hints: ['Gastronomía', 'Alimento', 'Comestible', 'Sabor', 'Restaurante', 'Ingrediente'] 
             },
             'Lugares': { 
                 icon: Icons.MapPin,
@@ -157,7 +158,7 @@
                     'Supermercado', 'Museo', 'Restaurante', 'Estadio', 'Iglesia', 'Banco', 'Hotel', 'Farmacia',
                     'Zoo', 'Circo', 'Discoteca', 'Cafetería', 'Oficina', 'Cárcel', 'Castillo', 'Granja', 'Montaña'
                 ], 
-                hints: ['Ubicación', 'Sitio público', 'Lugar'] 
+                hints: ['Ubicación', 'Sitio público', 'Lugar', 'Zona', 'Espacio'] 
             },
             'Objetos': { 
                 icon: Icons.Package,
@@ -166,7 +167,7 @@
                     'Bolígrafo', 'Cuaderno', 'Silla', 'Mesa', 'Cama', 'Lámpara', 'Espejo', 'Peine', 'Cepillo',
                     'Tijeras', 'Cuchillo', 'Tenedor', 'Plato', 'Vaso', 'Paraguas', 'Cartera', 'Cámara'
                 ], 
-                hints: ['Cosa material', 'Utensilio', 'Herramienta'] 
+                hints: ['Cosa material', 'Utensilio', 'Herramienta', 'Objeto cotidiano'] 
             },
             'Deportes': { 
                 icon: Icons.Trophy,
@@ -175,7 +176,7 @@
                     'Rugby', 'Ciclismo', 'Atletismo', 'Hockey', 'Esquí', 'Surf', 'Skate', 'Karate', 'Judo',
                     'Bádminton', 'Ping Pong', 'Escalada', 'Fórmula 1', 'MotoGP'
                 ], 
-                hints: ['Actividad física', 'Competición', 'Ejercicio'] 
+                hints: ['Actividad física', 'Competición', 'Ejercicio', 'Juego deportivo', 'Entrenamiento'] 
             },
             'Profesiones': { 
                 icon: Icons.Briefcase,
@@ -184,7 +185,7 @@
                     'Mecánico', 'Peluquero', 'Actor', 'Cantante', 'Pintor', 'Escritor', 'Jardinero', 'Carpintero',
                     'Electricista', 'Fontanero', 'Enfermero', 'Dentista', 'Veterinario', 'Piloto', 'Camarero'
                 ], 
-                hints: ['Trabajo', 'Ocupación', 'Empleo'] 
+                hints: ['Trabajo', 'Ocupación', 'Empleo', 'Labor', 'Carrera'] 
             },
             'Vehículos': { 
                 icon: Icons.Car,
@@ -193,7 +194,7 @@
                     'Camión', 'Furgoneta', 'Submarino', 'Cohete', 'Taxi', 'Patinete', 'Tractor', 'Ambulancia',
                     'Coche de Policía', 'Camión de Bomberos', 'Globo', 'Yate'
                 ], 
-                hints: ['Transporte', 'Motor', 'Movilidad'] 
+                hints: ['Transporte', 'Motor', 'Movilidad', 'Máquina', 'Viaje'] 
             },
             'Ropa': { 
                 icon: Icons.Shirt,
@@ -202,7 +203,7 @@
                     'Bufanda', 'Guantes', 'Chaqueta', 'Falda', 'Camisa', 'Traje', 'Bañador', 'Pijama',
                     'Ropa Interior', 'Gorra', 'Cinturón', 'Corbata'
                 ], 
-                hints: ['Vestimenta', 'Moda', 'Atuendo'] 
+                hints: ['Vestimenta', 'Moda', 'Atuendo', 'Prenda', 'Textil'] 
             },
             'Cine': { 
                 icon: Icons.Film,
@@ -211,7 +212,7 @@
                     'Batman', 'Jurassic Park', 'Toy Story', 'Frozen', 'El Padrino', 'Matrix', 'Shrek',
                     'Piratas del Caribe', 'Indiana Jones', 'Regreso al Futuro', 'Forrest Gump', 'Rocky'
                 ], 
-                hints: ['Película', 'Séptimo Arte', 'Cine'] 
+                hints: ['Película', 'Séptimo Arte', 'Cine', 'Gran Pantalla', 'Entretenimiento'] 
             },
             'Cuerpo': { 
                 icon: Icons.Heart,
@@ -220,7 +221,7 @@
                     'Dedo', 'Brazo', 'Pierna', 'Rodilla', 'Codo', 'Estómago', 'Pulmón', 'Diente',
                     'Lengua', 'Uña', 'Hueso', 'Sangre', 'Piel'
                 ], 
-                hints: ['Anatomía', 'Parte del cuerpo', 'Biología'] 
+                hints: ['Anatomía', 'Parte del cuerpo', 'Biología', 'Organismo', 'Fisiología'] 
             }
         };
 
@@ -249,6 +250,7 @@
             const [secretWord, setSecretWord] = useState('');
             const [currentCategoryName, setCurrentCategoryName] = useState('');
             const [selectedCategory, setSelectedCategory] = useState('MIX_ALL');
+            const [useHints, setUseHints] = useState(true); // NUEVO ESTADO: PISTAS SÍ/NO
             
             const [showCategoryModal, setShowCategoryModal] = useState(false);
 
@@ -261,9 +263,8 @@
             const [editingNames, setEditingNames] = useState(false);
             const [starterIndex, setStarterIndex] = useState(null);
 
-            // --- MEMORIA DEL JUEGO (Refs para no perder el dato al re-renderizar) ---
             const lastWordRef = useRef(null);
-            const lastImpostorRef = useRef(null); // Solo para modo 1 impostor
+            const lastImpostorRef = useRef(null);
 
             useEffect(() => {
                 const maxImpostors = Math.max(1, Math.floor((players - 1) / 2));
@@ -305,14 +306,12 @@
             const startGame = () => {
                 let word, cat, hint;
                 
-                // --- LÓGICA DE PALABRA (Con anti-repetición) ---
                 if (isCustomWord && customWord.trim()) {
                     word = customWord; cat = 'Personalizada'; hint = customHint.trim() || 'Personalizada';
                 } else {
                     cat = selectedCategory === 'MIX_ALL' ? Object.keys(GAME_DATA)[Math.floor(Math.random() * Object.keys(GAME_DATA).length)] : selectedCategory;
                     const data = GAME_DATA[cat] || GAME_DATA['Animales'];
                     
-                    // INTENTO DE NO REPETIR PALABRA
                     let attempts = 0;
                     do {
                         word = data.words[Math.floor(Math.random() * data.words.length)];
@@ -328,22 +327,19 @@
                 
                 setSecretWord(word); setCurrentCategoryName(cat); setImpostorHint(hint);
                 
-                // --- LÓGICA DE IMPOSTOR (Con anti-repetición) ---
                 const newImpostorIndices = new Set();
                 
                 if (impostorCount === 1 && players > 2) {
-                    // Modo clásico (1 impostor): Evitamos que repita si hay >2 jugadores
                     let newIndex;
                     let impAttempts = 0;
                     do {
                         newIndex = Math.floor(Math.random() * players);
                         impAttempts++;
-                    } while (newIndex === lastImpostorRef.current && impAttempts < 5); // 5 intentos para buscar otro
+                    } while (newIndex === lastImpostorRef.current && impAttempts < 5);
                     
                     newImpostorIndices.add(newIndex);
                     lastImpostorRef.current = newIndex;
                 } else {
-                    // Modo multijugador o pocos jugadores: aleatorio puro
                     while(newImpostorIndices.size < impostorCount) {
                         newImpostorIndices.add(Math.floor(Math.random() * players));
                     }
@@ -503,6 +499,25 @@
                                                 </div>
                                             </div>
 
+                                            {/* TOGGLE PISTAS */}
+                                            <div className="bg-slate-100 rounded-2xl p-3 flex items-center justify-between">
+                                                <div className="flex items-center gap-3">
+                                                    <div className={`p-2 rounded-xl ${useHints ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-200 text-slate-400'}`}>
+                                                        <Icons.Bulb size={24} />
+                                                    </div>
+                                                    <div className="text-left">
+                                                        <p className="font-bold text-slate-700 text-sm">Pistas para Impostor</p>
+                                                        <p className="text-xs text-slate-400">{useHints ? 'Ayuda activada' : 'Modo difícil (Sin pistas)'}</p>
+                                                    </div>
+                                                </div>
+                                                <div 
+                                                    onClick={() => setUseHints(!useHints)}
+                                                    className={`w-12 h-7 rounded-full p-1 cursor-pointer transition-colors duration-300 ${useHints ? 'bg-indigo-500' : 'bg-slate-300'}`}
+                                                >
+                                                    <div className={`bg-white w-5 h-5 rounded-full shadow-md transform duration-300 ${useHints ? 'translate-x-5' : ''}`}></div>
+                                                </div>
+                                            </div>
+
                                             <hr className="border-slate-100" />
                                             <div>
                                                 <div className="flex p-1 bg-slate-100 rounded-xl mb-4">
@@ -544,7 +559,12 @@
                                                         <div className="w-20 h-20 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-6"><span className="text-4xl">🤫</span></div>
                                                         <h3 className="text-3xl font-black text-rose-500 mb-2">IMPOSTOR</h3>
                                                         <p className="text-sm text-rose-400 mb-4 font-bold">Eres uno de los {impostorCount} impostores</p>
-                                                        <div className="bg-slate-50 rounded-xl p-4 border border-slate-100 mx-2"><p className="text-xs font-bold text-slate-400 uppercase">Tu pista</p><p className="text-lg font-bold text-slate-800">"{impostorHint}"</p></div>
+                                                        
+                                                        {useHints ? (
+                                                            <div className="bg-slate-50 rounded-xl p-4 border border-slate-100 mx-2"><p className="text-xs font-bold text-slate-400 uppercase">Tu pista</p><p className="text-lg font-bold text-slate-800">"{impostorHint}"</p></div>
+                                                        ) : (
+                                                            <div className="bg-rose-50 rounded-xl p-4 border border-rose-100 mx-2"><p className="text-xs font-bold text-rose-400 uppercase">MODO DIFÍCIL</p><p className="text-lg font-bold text-rose-800">Sin Pista</p></div>
+                                                        )}
                                                     </>
                                                 ) : (
                                                     <>
