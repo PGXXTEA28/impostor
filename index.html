@@ -121,7 +121,6 @@
             Heart: (p) => <Icon path={<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>} {...p} />
         };
 
-        // --- DATOS MEJORADOS (PISTAS GENÉRICAS PARA CANTANTES) ---
         const GAME_DATA = {
             'Cantantes': { 
                 icon: Icons.Music,
@@ -269,9 +268,7 @@
 
             useEffect(() => {
                 const maxImpostors = Math.max(1, Math.floor((players - 1) / 2));
-                // Si es aleatorio (-1) NO lo tocamos aunque cambien los jugadores.
-                // Solo si es un número fijo y excede el máximo "lógico", lo ajustamos.
-                if (impostorCount !== -1 && impostorCount > maxImpostors) {
+                if (impostorCount > maxImpostors && impostorCount !== -1) {
                     setImpostorCount(maxImpostors);
                 }
             }, [players]);
@@ -287,13 +284,12 @@
             };
 
             const handleImpostorCountChange = (increment) => {
-                // Para el modo manual, el máximo lógico es la mitad.
                 const maxImpostors = Math.max(1, Math.floor((players - 1) / 1.5)); 
                 let newCount = impostorCount + increment;
                 
-                if (impostorCount === 1 && increment === -1) newCount = -1; // Bajar a aleatorio
-                else if (impostorCount === -1 && increment === 1) newCount = 1; // Subir a 1
-                else if (impostorCount === -1 && increment === -1) return; // No bajar más de aleatorio
+                if (impostorCount === 1 && increment === -1) newCount = -1;
+                else if (impostorCount === -1 && increment === 1) newCount = 1;
+                else if (impostorCount === -1 && increment === -1) return;
                 
                 if (newCount > maxImpostors) return;
                 
@@ -337,18 +333,15 @@
                 
                 setSecretWord(word); setCurrentCategoryName(cat); setImpostorHint(hint);
                 
-                // --- LÓGICA IMPOSTORES ---
                 let finalImpostorCount = impostorCount;
                 if (impostorCount === -1) {
                     // MODO CAOS: Aleatorio entre 1 y TOTAL jugadores
-                    // Esto permite que todos sean impostores
                     finalImpostorCount = Math.floor(Math.random() * players) + 1;
                 }
                 setRealImpostorCount(finalImpostorCount);
 
                 const newImpostorIndices = new Set();
                 
-                // Si es solo 1 impostor, intentamos que no repita
                 if (finalImpostorCount === 1 && players > 2) {
                     let newIndex;
                     let impAttempts = 0;
@@ -360,7 +353,6 @@
                     newImpostorIndices.add(newIndex);
                     lastImpostorRef.current = newIndex;
                 } else {
-                    // Si son más (o todos), rellenamos hasta llegar al número
                     while(newImpostorIndices.size < finalImpostorCount) {
                         newImpostorIndices.add(Math.floor(Math.random() * players));
                     }
@@ -631,7 +623,6 @@
                                 <div className="text-center mt-6 mb-8">
                                     <span className="bg-green-100 text-green-700 font-bold px-4 py-1 rounded-full text-sm uppercase">En juego</span>
                                     <h2 className="text-3xl font-black text-slate-800 mt-4">Debate Abierto</h2>
-                                    {realImpostorCount > 1 && <p className="text-sm text-rose-500 font-bold mt-2">Hay {realImpostorCount} impostores entre vosotros</p>}
                                 </div>
                                 
                                 <div className="bg-orange-50 border-2 border-orange-100 rounded-2xl p-6 text-center mx-4 mb-6 shadow-sm">
