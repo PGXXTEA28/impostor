@@ -83,7 +83,7 @@
             );
         };
 
-        // --- ICONOS (CORREGIDOS) ---
+        // --- ICONOS ---
         const Icon = ({ path, className, size = 24 }) => (
             <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>{path}</svg>
         );
@@ -121,6 +121,7 @@
             Heart: (p) => <Icon path={<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>} {...p} />
         };
 
+        // --- DATOS ACTUALIZADOS ---
         const GAME_DATA = {
             'Cantantes': { 
                 icon: Icons.Music,
@@ -130,7 +131,7 @@
                     'Arcángel', 'Lunay', 'Karol G', 'Rosalía', 'Bizarrap', 'Duki', 'Trueno', 'Nicki Nicole', 
                     'Tiago PZK', 'Yandel', 'Wisin', 'Daddy Yankee', 'J Balvin', 'Maluma', 'Nicky Jam', 'Sech'
                 ], 
-                hints: ['Estrella Musical', 'Conciertos', 'Top Global', 'Fama Mundial', 'Videoclips', 'Premios Musicales', 'Escenario'] 
+                hints: ['Música Urbana', 'Voz', 'Escenario', 'Ritmo', 'Cantante', 'Fama', 'Hit Mundial'] 
             },
             'Animales': { 
                 icon: Icons.Paw,
@@ -333,15 +334,17 @@
                 
                 setSecretWord(word); setCurrentCategoryName(cat); setImpostorHint(hint);
                 
+                // --- MODO CAOS TOTAL: 1 a TOTAL JUGADORES ---
                 let finalImpostorCount = impostorCount;
                 if (impostorCount === -1) {
-                    const maxSensible = Math.max(1, Math.floor((players - 1) / 2));
-                    finalImpostorCount = Math.floor(Math.random() * maxSensible) + 1;
+                    // Ahora el máximo es el total de jugadores (Modo Caos)
+                    finalImpostorCount = Math.floor(Math.random() * players) + 1;
                 }
                 setRealImpostorCount(finalImpostorCount);
 
                 const newImpostorIndices = new Set();
                 
+                // Lógica de 1 impostor con memoria (para que no repita)
                 if (finalImpostorCount === 1 && players > 2) {
                     let newIndex;
                     let impAttempts = 0;
@@ -353,6 +356,7 @@
                     newImpostorIndices.add(newIndex);
                     lastImpostorRef.current = newIndex;
                 } else {
+                    // Si son más, rellenamos hasta llegar al número
                     while(newImpostorIndices.size < finalImpostorCount) {
                         newImpostorIndices.add(Math.floor(Math.random() * players));
                     }
