@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>El Impostor - Juego Completo</title>
+    <title>El Impostor - Juego de Mesa Online</title>
 
     <meta name="google-site-verification" content="google7459b76cd121390b" />
-    <meta name="description" content="Juega a 'El Impostor' online gratis con amigos. Adivina la palabra secreta, debate y descubre a los mentirosos. El mejor party game para móvil.">
-    <meta name="keywords" content="juego impostor, palabra secreta, juego social, jugar con amigos online, party game, deducción">
+    
+    <meta name="description" content="El Impostor es el mejor juego de mesa online para fiestas. Adivina la palabra secreta, debate con amigos y descubre al mentiroso. Gratis y sin descargas.">
+    <meta name="keywords" content="juego impostor, juego party, juego de mesa online, jugar con amigos, adivina la palabra, juego de deducción, among us cartas">
+    <meta name="author" content="El Impostor Game">
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8005495548658117" crossorigin="anonymous"></script>
     
@@ -23,7 +25,6 @@
                     animation: {
                         'blob': "blob 7s infinite",
                         'fade-in': 'fadeIn 0.5s ease-out forwards',
-                        'slide-up': 'slideUp 0.3s ease-out forwards',
                         'bounce-in': 'bounceIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
                     },
                     keyframes: {
@@ -33,14 +34,7 @@
                             "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
                             "100%": { transform: "translate(0px, 0px) scale(1)" },
                         },
-                        fadeIn: {
-                            from: { opacity: 0 },
-                            to: { opacity: 1 }
-                        },
-                        slideUp: {
-                            from: { transform: 'translateY(100%)' },
-                            to: { transform: 'translateY(0)' }
-                        },
+                        fadeIn: { from: { opacity: 0 }, to: { opacity: 1 } },
                         bounceIn: {
                             '0%': { transform: 'scale(0.9)', opacity: 0 },
                             '60%': { transform: 'scale(1.05)', opacity: 1 },
@@ -52,10 +46,9 @@
         }
     </script>
     <style>
-        body { background-color: #f8fafc; user-select: none; -webkit-tap-highlight-color: transparent; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        body { background-color: #f8fafc; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 10px; }
-        
         .ad-placeholder {
             background-image: repeating-linear-gradient(45deg, #f1f5f9 25%, transparent 25%, transparent 75%, #f1f5f9 75%, #f1f5f9), repeating-linear-gradient(45deg, #f1f5f9 25%, #f8fafc 25%, #f8fafc 75%, #f1f5f9 75%, #f1f5f9);
             background-position: 0 0, 10px 10px;
@@ -99,7 +92,6 @@
             ChevronLeft: (p) => <Icon path={<path d="m15 18-6-6 6-6"/>} {...p} />,
             Plus: (p) => <Icon path={<><path d="M5 12h14"/><path d="M12 5v14"/></>} {...p} />,
             Minus: (p) => <Icon path={<path d="M5 12h14"/>} {...p} />,
-            Shuffle: (p) => <Icon path={<><path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l14.2-12.6"/><path d="M22 18h-1.4c-1.3 0-2.5-.6-3.3-1.7L3.1 3.7"/><path d="M2 6h1.4c1.3 0 2.5.6 3.3 1.7l1.4 1.2"/><path d="M22 6h-1.4c-1.3 0-2.5.6-3.3 1.7l-1.4 1.2"/></>} {...p} />,
             Message: (p) => <Icon path={<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>} {...p} />,
             Trash: (p) => <Icon path={<><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></>} {...p} />,
             Close: (p) => <Icon path={<path d="M18 6 6 18M6 6l12 12"/>} {...p} />,
@@ -124,104 +116,19 @@
         const GAME_DATA = {
             'Cantantes': { 
                 icon: Icons.Music,
-                words: [
-                    'Mora', 'Jhayco', 'Feid', 'Quevedo', 'Saiko', 'Bad Bunny', 'Rauw Alejandro', 'Myke Towers', 
-                    'Eladio Carrión', 'Young Miko', 'Dei V', 'Cris Mj', 'Anuel AA', 'Ozuna', 'Bryant Myers', 
-                    'Arcángel', 'Lunay', 'Karol G', 'Rosalía', 'Bizarrap', 'Duki', 'Trueno', 'Nicki Nicole', 
-                    'Tiago PZK', 'Yandel', 'Wisin', 'Daddy Yankee', 'J Balvin', 'Maluma', 'Nicky Jam', 'Sech'
-                ], 
+                words: ['Mora', 'Jhayco', 'Feid', 'Quevedo', 'Saiko', 'Bad Bunny', 'Rauw Alejandro', 'Myke Towers', 'Eladio Carrión', 'Young Miko', 'Dei V', 'Cris Mj', 'Anuel AA', 'Ozuna', 'Bryant Myers', 'Arcángel', 'Lunay', 'Karol G', 'Rosalía', 'Bizarrap', 'Duki', 'Trueno', 'Nicki Nicole', 'Tiago PZK', 'Yandel', 'Wisin', 'Daddy Yankee', 'J Balvin', 'Maluma', 'Nicky Jam', 'Sech'],
                 hints: ['Usa Micrófono', 'Sale en Spotify', 'Tiene Videoclips', 'Da Conciertos', 'Es Famoso/a', 'Tiene Fans', 'Compone Canciones'] 
             },
-            'Animales': { 
-                icon: Icons.Paw,
-                words: [
-                    'León', 'Pingüino', 'Elefante', 'Jirafa', 'Delfín', 'Águila', 'Koala', 'Tigre', 'Canguro', 'Oso',
-                    'Lobo', 'Zorro', 'Ballena', 'Serpiente', 'Caballo', 'Perro', 'Gato', 'Ratón', 'Mono', 'Cocodrilo',
-                    'Tiburón', 'Pulpo', 'Medusa', 'Hormiga', 'Abeja', 'Mariposa', 'Búho', 'Cebra', 'Rinoceronte', 'Hipopótamo'
-                ], 
-                hints: ['Ser vivo', 'Naturaleza', 'Fauna', 'Criatura', 'Reino Animal'] 
-            },
-            'Comida': { 
-                icon: Icons.Pizza,
-                words: [
-                    'Pizza', 'Sushi', 'Hamburguesa', 'Tacos', 'Paella', 'Helado', 'Chocolate', 'Ensalada',
-                    'Espaguetis', 'Sopa', 'Tarta', 'Fruta', 'Queso', 'Pan', 'Huevo', 'Pollo', 'Pescado', 'Arroz',
-                    'Galletas', 'Patatas Fritas', 'Bocadillo', 'Cereal', 'Yogur', 'Croissant', 'Donut', 'Burrito'
-                ], 
-                hints: ['Gastronomía', 'Alimento', 'Comestible', 'Sabor', 'Restaurante', 'Ingrediente'] 
-            },
-            'Lugares': { 
-                icon: Icons.MapPin,
-                words: [
-                    'Playa', 'Hospital', 'Escuela', 'Cine', 'Biblioteca', 'Aeropuerto', 'Gimnasio', 'Parque',
-                    'Supermercado', 'Museo', 'Restaurante', 'Estadio', 'Iglesia', 'Banco', 'Hotel', 'Farmacia',
-                    'Zoo', 'Circo', 'Discoteca', 'Cafetería', 'Oficina', 'Cárcel', 'Castillo', 'Granja', 'Montaña'
-                ], 
-                hints: ['Ubicación', 'Sitio público', 'Lugar', 'Zona', 'Espacio'] 
-            },
-            'Objetos': { 
-                icon: Icons.Package,
-                words: [
-                    'Teléfono', 'Reloj', 'Zapatos', 'Gafas', 'Llave', 'Mochila', 'Ordenador', 'Botella',
-                    'Bolígrafo', 'Cuaderno', 'Silla', 'Mesa', 'Cama', 'Lámpara', 'Espejo', 'Peine', 'Cepillo',
-                    'Tijeras', 'Cuchillo', 'Tenedor', 'Plato', 'Vaso', 'Paraguas', 'Cartera', 'Cámara'
-                ], 
-                hints: ['Cosa material', 'Utensilio', 'Herramienta', 'Objeto cotidiano'] 
-            },
-            'Deportes': { 
-                icon: Icons.Trophy,
-                words: [
-                    'Fútbol', 'Baloncesto', 'Tenis', 'Natación', 'Boxeo', 'Golf', 'Voleibol', 'Béisbol',
-                    'Rugby', 'Ciclismo', 'Atletismo', 'Hockey', 'Esquí', 'Surf', 'Skate', 'Karate', 'Judo',
-                    'Bádminton', 'Ping Pong', 'Escalada', 'Fórmula 1', 'MotoGP'
-                ], 
-                hints: ['Actividad física', 'Competición', 'Ejercicio', 'Juego deportivo', 'Entrenamiento'] 
-            },
-            'Profesiones': { 
-                icon: Icons.Briefcase,
-                words: [
-                    'Médico', 'Bombero', 'Policía', 'Profesor', 'Cocinero', 'Astronauta', 'Abogado', 'Ingeniero',
-                    'Mecánico', 'Peluquero', 'Actor', 'Cantante', 'Pintor', 'Escritor', 'Jardinero', 'Carpintero',
-                    'Electricista', 'Fontanero', 'Enfermero', 'Dentista', 'Veterinario', 'Piloto', 'Camarero'
-                ], 
-                hints: ['Trabajo', 'Ocupación', 'Empleo', 'Labor', 'Carrera'] 
-            },
-            'Vehículos': { 
-                icon: Icons.Car,
-                words: [
-                    'Coche', 'Avión', 'Barco', 'Bicicleta', 'Tren', 'Helicóptero', 'Moto', 'Autobús',
-                    'Camión', 'Furgoneta', 'Submarino', 'Cohete', 'Taxi', 'Patinete', 'Tractor', 'Ambulancia',
-                    'Coche de Policía', 'Camión de Bomberos', 'Globo', 'Yate'
-                ], 
-                hints: ['Transporte', 'Motor', 'Movilidad', 'Máquina', 'Viaje'] 
-            },
-            'Ropa': { 
-                icon: Icons.Shirt,
-                words: [
-                    'Camiseta', 'Pantalón', 'Vestido', 'Abrigo', 'Sombrero', 'Calcetines', 'Zapatillas',
-                    'Bufanda', 'Guantes', 'Chaqueta', 'Falda', 'Camisa', 'Traje', 'Bañador', 'Pijama',
-                    'Ropa Interior', 'Gorra', 'Cinturón', 'Corbata'
-                ], 
-                hints: ['Vestimenta', 'Moda', 'Atuendo', 'Prenda', 'Textil'] 
-            },
-            'Cine': { 
-                icon: Icons.Film,
-                words: [
-                    'Titanic', 'Star Wars', 'Harry Potter', 'El Rey León', 'Avatar', 'Avengers', 'Spiderman',
-                    'Batman', 'Jurassic Park', 'Toy Story', 'Frozen', 'El Padrino', 'Matrix', 'Shrek',
-                    'Piratas del Caribe', 'Indiana Jones', 'Regreso al Futuro', 'Forrest Gump', 'Rocky'
-                ], 
-                hints: ['Película', 'Séptimo Arte', 'Cine', 'Gran Pantalla', 'Entretenimiento'] 
-            },
-            'Cuerpo': { 
-                icon: Icons.Heart,
-                words: [
-                    'Ojo', 'Mano', 'Corazón', 'Cerebro', 'Pie', 'Nariz', 'Boca', 'Oreja', 'Pelo',
-                    'Dedo', 'Brazo', 'Pierna', 'Rodilla', 'Codo', 'Estómago', 'Pulmón', 'Diente',
-                    'Lengua', 'Uña', 'Hueso', 'Sangre', 'Piel'
-                ], 
-                hints: ['Anatomía', 'Parte del cuerpo', 'Biología', 'Organismo', 'Fisiología'] 
-            }
+            'Animales': { icon: Icons.Paw, words: ['León', 'Pingüino', 'Elefante', 'Jirafa', 'Delfín', 'Águila', 'Koala', 'Tigre', 'Canguro', 'Oso', 'Lobo', 'Zorro', 'Ballena', 'Serpiente', 'Caballo', 'Perro', 'Gato', 'Ratón', 'Mono', 'Cocodrilo', 'Tiburón', 'Pulpo', 'Medusa', 'Hormiga', 'Abeja', 'Mariposa', 'Búho', 'Cebra', 'Rinoceronte', 'Hipopótamo'], hints: ['Ser vivo', 'Naturaleza', 'Fauna', 'Criatura', 'Reino Animal'] },
+            'Comida': { icon: Icons.Pizza, words: ['Pizza', 'Sushi', 'Hamburguesa', 'Tacos', 'Paella', 'Helado', 'Chocolate', 'Ensalada', 'Espaguetis', 'Sopa', 'Tarta', 'Fruta', 'Queso', 'Pan', 'Huevo', 'Pollo', 'Pescado', 'Arroz', 'Galletas', 'Patatas Fritas', 'Bocadillo', 'Cereal', 'Yogur', 'Croissant', 'Donut', 'Burrito'], hints: ['Gastronomía', 'Alimento', 'Comestible', 'Sabor', 'Restaurante', 'Ingrediente'] },
+            'Lugares': { icon: Icons.MapPin, words: ['Playa', 'Hospital', 'Escuela', 'Cine', 'Biblioteca', 'Aeropuerto', 'Gimnasio', 'Parque', 'Supermercado', 'Museo', 'Restaurante', 'Estadio', 'Iglesia', 'Banco', 'Hotel', 'Farmacia', 'Zoo', 'Circo', 'Discoteca', 'Cafetería', 'Oficina', 'Cárcel', 'Castillo', 'Granja', 'Montaña'], hints: ['Ubicación', 'Sitio público', 'Lugar', 'Zona', 'Espacio'] },
+            'Objetos': { icon: Icons.Package, words: ['Teléfono', 'Reloj', 'Zapatos', 'Gafas', 'Llave', 'Mochila', 'Ordenador', 'Botella', 'Bolígrafo', 'Cuaderno', 'Silla', 'Mesa', 'Cama', 'Lámpara', 'Espejo', 'Peine', 'Cepillo', 'Tijeras', 'Cuchillo', 'Tenedor', 'Plato', 'Vaso', 'Paraguas', 'Cartera', 'Cámara'], hints: ['Cosa material', 'Utensilio', 'Herramienta', 'Objeto cotidiano'] },
+            'Deportes': { icon: Icons.Trophy, words: ['Fútbol', 'Baloncesto', 'Tenis', 'Natación', 'Boxeo', 'Golf', 'Voleibol', 'Béisbol', 'Rugby', 'Ciclismo', 'Atletismo', 'Hockey', 'Esquí', 'Surf', 'Skate', 'Karate', 'Judo', 'Bádminton', 'Ping Pong', 'Escalada', 'Fórmula 1', 'MotoGP'], hints: ['Actividad física', 'Competición', 'Ejercicio', 'Juego deportivo', 'Entrenamiento'] },
+            'Profesiones': { icon: Icons.Briefcase, words: ['Médico', 'Bombero', 'Policía', 'Profesor', 'Cocinero', 'Astronauta', 'Abogado', 'Ingeniero', 'Mecánico', 'Peluquero', 'Actor', 'Cantante', 'Pintor', 'Escritor', 'Jardinero', 'Carpintero', 'Electricista', 'Fontanero', 'Enfermero', 'Dentista', 'Veterinario', 'Piloto', 'Camarero'], hints: ['Trabajo', 'Ocupación', 'Empleo', 'Labor', 'Carrera'] },
+            'Vehículos': { icon: Icons.Car, words: ['Coche', 'Avión', 'Barco', 'Bicicleta', 'Tren', 'Helicóptero', 'Moto', 'Autobús', 'Camión', 'Furgoneta', 'Submarino', 'Cohete', 'Taxi', 'Patinete', 'Tractor', 'Ambulancia', 'Coche de Policía', 'Camión de Bomberos', 'Globo', 'Yate'], hints: ['Transporte', 'Motor', 'Movilidad', 'Máquina', 'Viaje'] },
+            'Ropa': { icon: Icons.Shirt, words: ['Camiseta', 'Pantalón', 'Vestido', 'Abrigo', 'Sombrero', 'Calcetines', 'Zapatillas', 'Bufanda', 'Guantes', 'Chaqueta', 'Falda', 'Camisa', 'Traje', 'Bañador', 'Pijama', 'Ropa Interior', 'Gorra', 'Cinturón', 'Corbata'], hints: ['Vestimenta', 'Moda', 'Atuendo', 'Prenda', 'Textil'] },
+            'Cine': { icon: Icons.Film, words: ['Titanic', 'Star Wars', 'Harry Potter', 'El Rey León', 'Avatar', 'Avengers', 'Spiderman', 'Batman', 'Jurassic Park', 'Toy Story', 'Frozen', 'El Padrino', 'Matrix', 'Shrek', 'Piratas del Caribe', 'Indiana Jones', 'Regreso al Futuro', 'Forrest Gump', 'Rocky'], hints: ['Película', 'Séptimo Arte', 'Cine', 'Gran Pantalla', 'Entretenimiento'] },
+            'Cuerpo': { icon: Icons.Heart, words: ['Ojo', 'Mano', 'Corazón', 'Cerebro', 'Pie', 'Nariz', 'Boca', 'Oreja', 'Pelo', 'Dedo', 'Brazo', 'Pierna', 'Rodilla', 'Codo', 'Estómago', 'Pulmón', 'Diente', 'Lengua', 'Uña', 'Hueso', 'Sangre', 'Piel'], hints: ['Anatomía', 'Parte del cuerpo', 'Biología', 'Organismo', 'Fisiología'] }
         };
 
         const Button = ({ children, onClick, variant = 'primary', className = '', disabled = false }) => {
@@ -245,14 +152,11 @@
             const [impostorCount, setImpostorCount] = useState(1);
             const [playerNames, setPlayerNames] = useState(['Jugador 1', 'Jugador 2', 'Jugador 3', 'Jugador 4']);
             const [impostorIndices, setImpostorIndices] = useState([]);
-            
             const [secretWord, setSecretWord] = useState('');
             const [currentCategoryName, setCurrentCategoryName] = useState('');
             const [selectedCategory, setSelectedCategory] = useState('MIX_ALL');
             const [useHints, setUseHints] = useState(true); 
-            
             const [showCategoryModal, setShowCategoryModal] = useState(false);
-
             const [customWord, setCustomWord] = useState('');
             const [customHint, setCustomHint] = useState('');
             const [isCustomWord, setIsCustomWord] = useState(false);
@@ -262,13 +166,14 @@
             const [editingNames, setEditingNames] = useState(false);
             const [starterIndex, setStarterIndex] = useState(null);
             const [realImpostorCount, setRealImpostorCount] = useState(1);
+            const [showPrivacy, setShowPrivacy] = useState(false);
 
             const lastWordRef = useRef(null);
             const lastImpostorRef = useRef(null);
 
             useEffect(() => {
                 const maxImpostors = Math.max(1, Math.floor((players - 1) / 2));
-                if (impostorCount > maxImpostors && impostorCount !== -1) {
+                if (impostorCount !== -1 && impostorCount > maxImpostors) {
                     setImpostorCount(maxImpostors);
                 }
             }, [players]);
@@ -286,13 +191,10 @@
             const handleImpostorCountChange = (increment) => {
                 const maxImpostors = Math.max(1, Math.floor((players - 1) / 1.5)); 
                 let newCount = impostorCount + increment;
-                
                 if (impostorCount === 1 && increment === -1) newCount = -1;
                 else if (impostorCount === -1 && increment === 1) newCount = 1;
                 else if (impostorCount === -1 && increment === -1) return;
-                
                 if (newCount > maxImpostors) return;
-                
                 setImpostorCount(newCount);
             };
 
@@ -311,37 +213,30 @@
 
             const startGame = () => {
                 let word, cat, hint;
-                
                 if (isCustomWord && customWord.trim()) {
                     word = customWord; cat = 'Personalizada'; hint = customHint.trim() || 'Personalizada';
                 } else {
                     cat = selectedCategory === 'MIX_ALL' ? Object.keys(GAME_DATA)[Math.floor(Math.random() * Object.keys(GAME_DATA).length)] : selectedCategory;
                     const data = GAME_DATA[cat] || GAME_DATA['Animales'];
-                    
                     let attempts = 0;
                     do {
                         word = data.words[Math.floor(Math.random() * data.words.length)];
                         attempts++;
                     } while (word === lastWordRef.current && attempts < 10);
-                    
                     lastWordRef.current = word;
-
                     const hints = [...data.hints];
                     if (selectedCategory === 'MIX_ALL') hints.push(cat);
                     hint = hints[Math.floor(Math.random() * hints.length)];
                 }
-                
                 setSecretWord(word); setCurrentCategoryName(cat); setImpostorHint(hint);
                 
                 let finalImpostorCount = impostorCount;
                 if (impostorCount === -1) {
-                    // MODO CAOS: Aleatorio entre 1 y TOTAL jugadores
                     finalImpostorCount = Math.floor(Math.random() * players) + 1;
                 }
                 setRealImpostorCount(finalImpostorCount);
 
                 const newImpostorIndices = new Set();
-                
                 if (finalImpostorCount === 1 && players > 2) {
                     let newIndex;
                     let impAttempts = 0;
@@ -349,7 +244,6 @@
                         newIndex = Math.floor(Math.random() * players);
                         impAttempts++;
                     } while (newIndex === lastImpostorRef.current && impAttempts < 5);
-                    
                     newImpostorIndices.add(newIndex);
                     lastImpostorRef.current = newIndex;
                 } else {
@@ -357,27 +251,18 @@
                         newImpostorIndices.add(Math.floor(Math.random() * players));
                     }
                 }
-
                 setImpostorIndices(Array.from(newImpostorIndices));
                 setStarterIndex(Math.floor(Math.random() * players));
                 setCurrentPlayerIndex(0); setIsWordVisible(false); setPhase('pass');
             };
 
             const handleBack = () => {
-                if (editingNames) {
-                    setEditingNames(false);
-                } else if (phase === 'setup') {
-                    setPhase('home');
-                } else {
-                    setPhase('home');
-                }
+                if (editingNames) setEditingNames(false);
+                else setPhase('home');
             };
 
             const isCurrentImpostor = impostorIndices.includes(currentPlayerIndex);
-            
-            const CurrentCategoryIcon = selectedCategory === 'MIX_ALL' 
-                ? Icons.Zap 
-                : (GAME_DATA[selectedCategory] ? GAME_DATA[selectedCategory].icon : Icons.Grid);
+            const CurrentCategoryIcon = selectedCategory === 'MIX_ALL' ? Icons.Zap : (GAME_DATA[selectedCategory] ? GAME_DATA[selectedCategory].icon : Icons.Grid);
 
             return (
                 <div className="max-w-md mx-auto h-[100dvh] p-5 flex flex-col relative overflow-hidden font-sans">
@@ -385,13 +270,17 @@
                     <div className="absolute bottom-[10%] right-[-10%] w-72 h-72 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-40 pointer-events-none"></div>
                     
                     {phase !== 'home' && !showCategoryModal && (
-                        <button 
-                            onClick={handleBack} 
-                            className="absolute top-4 left-4 z-40 p-2 rounded-full text-slate-400 hover:bg-white/50 hover:text-slate-700 transition-all active:scale-90"
-                            title="Volver"
-                        >
-                            <Icons.ChevronLeft size={28} />
-                        </button>
+                        <button onClick={handleBack} className="absolute top-4 left-4 z-40 p-2 rounded-full text-slate-400 hover:bg-white/50 hover:text-slate-700 transition-all active:scale-90"><Icons.ChevronLeft size={28} /></button>
+                    )}
+
+                    {showPrivacy && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={() => setShowPrivacy(false)}>
+                            <div className="bg-white p-6 rounded-2xl max-w-sm w-full" onClick={e => e.stopPropagation()}>
+                                <h3 className="font-bold text-lg mb-2">Política de Privacidad</h3>
+                                <p className="text-sm text-slate-600 mb-4">Esta aplicación no recopila, almacena ni comparte ningún dato personal de los usuarios. Todo el juego se ejecuta localmente en tu dispositivo.</p>
+                                <Button onClick={() => setShowPrivacy(false)}>Cerrar</Button>
+                            </div>
+                        </div>
                     )}
 
                     {showCategoryModal && (
@@ -402,32 +291,17 @@
                                     <button onClick={() => setShowCategoryModal(false)} className="p-2 bg-slate-100 rounded-full hover:bg-slate-200 transition-colors"><Icons.Close size={20} /></button>
                                 </div>
                                 <div className="overflow-y-auto p-4 custom-scrollbar grid grid-cols-2 gap-3 pb-8">
-                                    <button 
-                                        onClick={() => { setSelectedCategory('MIX_ALL'); setShowCategoryModal(false); }}
-                                        className={`col-span-2 p-4 rounded-2xl flex items-center gap-4 transition-all ${selectedCategory === 'MIX_ALL' ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg shadow-indigo-200 ring-2 ring-indigo-500 ring-offset-2' : 'bg-slate-50 hover:bg-slate-100 text-slate-700'}`}
-                                    >
-                                        <div className={`p-3 rounded-xl ${selectedCategory === 'MIX_ALL' ? 'bg-white/20' : 'bg-white shadow-sm text-indigo-500'}`}>
-                                            <Icons.Zap size={24} />
-                                        </div>
-                                        <div className="text-left flex-1">
-                                            <p className="font-bold text-lg">Mix Aleatorio</p>
-                                            <p className={`text-xs ${selectedCategory === 'MIX_ALL' ? 'text-white/80' : 'text-slate-400'}`}>¡Todas las palabras!</p>
-                                        </div>
+                                    <button onClick={() => { setSelectedCategory('MIX_ALL'); setShowCategoryModal(false); }} className={`col-span-2 p-4 rounded-2xl flex items-center gap-4 transition-all ${selectedCategory === 'MIX_ALL' ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg shadow-indigo-200 ring-2 ring-indigo-500 ring-offset-2' : 'bg-slate-50 hover:bg-slate-100 text-slate-700'}`}>
+                                        <div className={`p-3 rounded-xl ${selectedCategory === 'MIX_ALL' ? 'bg-white/20' : 'bg-white shadow-sm text-indigo-500'}`}><Icons.Zap size={24} /></div>
+                                        <div className="text-left flex-1"><p className="font-bold text-lg">Mix Aleatorio</p><p className={`text-xs ${selectedCategory === 'MIX_ALL' ? 'text-white/80' : 'text-slate-400'}`}>¡Todas las palabras!</p></div>
                                         {selectedCategory === 'MIX_ALL' && <Icons.Check size={20} />}
                                     </button>
-
                                     {Object.keys(GAME_DATA).map(cat => {
                                         const CatIcon = GAME_DATA[cat].icon;
                                         const isSelected = selectedCategory === cat;
                                         return (
-                                            <button 
-                                                key={cat}
-                                                onClick={() => { setSelectedCategory(cat); setShowCategoryModal(false); }}
-                                                className={`p-3 rounded-2xl flex flex-col items-center gap-2 text-center transition-all border-2 ${isSelected ? 'border-indigo-500 bg-indigo-50 text-indigo-700' : 'border-transparent bg-slate-50 hover:bg-slate-100 text-slate-600'}`}
-                                            >
-                                                <div className={`p-3 rounded-xl mb-1 ${isSelected ? 'bg-indigo-200 text-indigo-700' : 'bg-white shadow-sm text-slate-400'}`}>
-                                                    <CatIcon size={28} />
-                                                </div>
+                                            <button key={cat} onClick={() => { setSelectedCategory(cat); setShowCategoryModal(false); }} className={`p-3 rounded-2xl flex flex-col items-center gap-2 text-center transition-all border-2 ${isSelected ? 'border-indigo-500 bg-indigo-50 text-indigo-700' : 'border-transparent bg-slate-50 hover:bg-slate-100 text-slate-600'}`}>
+                                                <div className={`p-3 rounded-xl mb-1 ${isSelected ? 'bg-indigo-200 text-indigo-700' : 'bg-white shadow-sm text-slate-400'}`}><CatIcon size={28} /></div>
                                                 <span className="font-bold text-sm leading-tight">{cat}</span>
                                             </button>
                                         )
@@ -438,45 +312,60 @@
                     )}
 
                     <div className="relative z-10 flex-1 flex flex-col h-full">
-                        
                         {phase === 'home' && (
                             <div className="flex flex-col items-center justify-center min-h-[80vh] space-y-8 animate-fade-in">
                                 <div className="bg-gradient-to-tr from-indigo-500 to-purple-500 p-6 rounded-3xl shadow-lg mb-4 transform rotate-3"><Icons.Users size={64} className="text-white" /></div>
                                 <div className="text-center"><h1 className="text-4xl font-black text-slate-800 mb-2">El Impostor</h1><p className="text-slate-500 text-lg px-6">Un juego de deducción, engaño y risas.</p></div>
                                 <Button onClick={() => setPhase('setup')}><Icons.Play size={20} /> Empezar Partida</Button>
-                                {/* Banner de Publicidad Inferior */}
                                 <AdBlock type="banner" label="BANNER INFERIOR" />
+                                
+                                {/* NUEVA SECCIÓN DE CONTENIDO PARA ADSENSE */}
+                                <div className="w-full max-w-md mt-8 space-y-6 text-left border-t border-slate-200 pt-8">
+                                    <section>
+                                        <h2 className="text-xl font-bold text-slate-800 mb-2">¿Cómo se juega a El Impostor?</h2>
+                                        <p className="text-sm text-slate-600 mb-2">El Impostor es un juego de mesa digital perfecto para fiestas y reuniones. La mecánica es sencilla:</p>
+                                        <ol className="list-decimal list-inside text-sm text-slate-600 space-y-1 ml-1">
+                                            <li>Configura los jugadores y la categoría.</li>
+                                            <li>Pasad el móvil: todos verán la palabra secreta menos el Impostor.</li>
+                                            <li>Debatid y haced preguntas sin revelar la palabra.</li>
+                                            <li>Votad quién creéis que es el mentiroso.</li>
+                                        </ol>
+                                    </section>
+                                    <section>
+                                        <h3 className="font-bold text-slate-700 mb-1">Características del juego</h3>
+                                        <ul className="list-disc list-inside text-sm text-slate-600 space-y-1">
+                                            <li>Modo offline multijugador local.</li>
+                                            <li>Más de 10 categorías (Deportes, Cine, Música...).</li>
+                                            <li>Modo aleatorio para partidas impredecibles.</li>
+                                            <li>Totalmente gratis y sin descargas.</li>
+                                        </ul>
+                                    </section>
+                                    <div className="pt-4 text-center">
+                                        <button onClick={() => setShowPrivacy(true)} className="text-xs text-slate-400 hover:text-indigo-500 underline">Política de Privacidad</button>
+                                    </div>
+                                </div>
                             </div>
                         )}
 
                         {phase === 'setup' && (
                             editingNames ? (
                                 <div className="flex flex-col h-full space-y-4 animate-fade-in py-4 mt-8">
-                                    <div className="flex items-center justify-center gap-2 mb-2 relative">
-                                        <h2 className="text-xl font-bold text-slate-800">Nombres</h2>
-                                    </div>
+                                    <div className="flex items-center justify-center gap-2 mb-2 relative"><h2 className="text-xl font-bold text-slate-800">Nombres</h2></div>
                                     <div className="flex-1 overflow-y-auto space-y-3 px-1 custom-scrollbar">
                                         {playerNames.map((name, idx) => (
                                             <div key={idx} className="flex items-center gap-2">
                                                 <span className="w-6 text-sm font-bold text-slate-400">{idx + 1}.</span>
                                                 <input type="text" value={name} onChange={(e) => updatePlayerName(idx, e.target.value)} className="flex-1 p-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none shadow-sm" placeholder={`Jugador ${idx + 1}`} />
-                                                {players > 3 && (
-                                                    <button onClick={() => removePlayer(idx)} className="p-3 bg-white border border-rose-100 text-rose-500 rounded-xl hover:bg-rose-50 transition-colors">
-                                                        <Icons.Trash size={20} />
-                                                    </button>
-                                                )}
+                                                {players > 3 && (<button onClick={() => removePlayer(idx)} className="p-3 bg-white border border-rose-100 text-rose-500 rounded-xl hover:bg-rose-50 transition-colors"><Icons.Trash size={20} /></button>)}
                                             </div>
                                         ))}
-                                        <button onClick={() => handlePlayerCountChange(1)} className="w-full py-3 border-2 border-dashed border-slate-300 rounded-xl text-slate-400 font-bold hover:bg-slate-50 hover:border-slate-400 transition-all flex items-center justify-center gap-2">
-                                            <Icons.Plus size={20} /> Añadir Jugador
-                                        </button>
+                                        <button onClick={() => handlePlayerCountChange(1)} className="w-full py-3 border-2 border-dashed border-slate-300 rounded-xl text-slate-400 font-bold hover:bg-slate-50 hover:border-slate-400 transition-all flex items-center justify-center gap-2"><Icons.Plus size={20} /> Añadir Jugador</button>
                                     </div>
                                     <Button onClick={() => setEditingNames(false)}>Listo</Button>
                                 </div>
                             ) : (
                                 <div className="flex flex-col h-full pt-12 pb-4 animate-fade-in">
                                     <h2 className="text-2xl font-bold text-slate-800 text-center mb-6 shrink-0">Configurar Partida</h2>
-                                    
                                     <div className="flex-1 overflow-y-auto custom-scrollbar px-1 pb-4">
                                         <Card>
                                             <div className="space-y-6">
@@ -489,88 +378,49 @@
                                                     </div>
                                                     <button onClick={() => setEditingNames(true)} className="w-full mt-2 py-2 text-sm font-medium text-slate-500 hover:text-indigo-600 flex items-center justify-center gap-2"><Icons.Edit size={14} /> Editar nombres</button>
                                                 </div>
-
                                                 <div className="grid grid-cols-2 gap-4">
                                                     <div>
                                                         <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block text-center">Impostores</label>
                                                         <div className="flex items-center justify-between bg-slate-100 rounded-2xl p-2 h-16">
                                                             <button onClick={() => handleImpostorCountChange(-1)} className="w-8 h-full flex items-center justify-center bg-white rounded-xl shadow-sm"><Icons.Minus size={16} /></button>
-                                                            <div className="w-8 text-center flex items-center justify-center">
-                                                                {impostorCount === -1 ? (
-                                                                    <Icons.Dice size={28} className="text-indigo-500 animate-pulse" />
-                                                                ) : (
-                                                                    <span className="text-xl font-black text-rose-500">{impostorCount}</span>
-                                                                )}
-                                                            </div>
+                                                            <div className="w-8 text-center flex items-center justify-center">{impostorCount === -1 ? (<Icons.Dice size={28} className="text-indigo-500 animate-pulse" />) : (<span className="text-xl font-black text-rose-500">{impostorCount}</span>)}</div>
                                                             <button onClick={() => handleImpostorCountChange(1)} className="w-8 h-full flex items-center justify-center bg-white rounded-xl shadow-sm"><Icons.Plus size={16} /></button>
                                                         </div>
                                                     </div>
                                                     <div>
                                                         <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block text-center">Categoría</label>
-                                                        <button 
-                                                            onClick={() => !isCustomWord && setShowCategoryModal(true)}
-                                                            disabled={isCustomWord}
-                                                            className={`w-full h-16 rounded-2xl flex items-center justify-center gap-2 px-2 transition-all ${isCustomWord ? 'bg-slate-100 opacity-50 cursor-not-allowed' : 'bg-indigo-50 border-2 border-indigo-100 hover:border-indigo-300 text-indigo-700'}`}
-                                                        >
-                                                            {!isCustomWord && <CurrentCategoryIcon size={20} />}
-                                                            <span className="text-sm font-bold truncate">
-                                                                {isCustomWord ? "Manual" : (selectedCategory === 'MIX_ALL' ? "Mix" : selectedCategory)}
-                                                            </span>
+                                                        <button onClick={() => !isCustomWord && setShowCategoryModal(true)} disabled={isCustomWord} className={`w-full h-16 rounded-2xl flex items-center justify-center gap-2 px-2 transition-all ${isCustomWord ? 'bg-slate-100 opacity-50 cursor-not-allowed' : 'bg-indigo-50 border-2 border-indigo-100 hover:border-indigo-300 text-indigo-700'}`}>
+                                                            {!isCustomWord && <CurrentCategoryIcon size={20} />}<span className="text-sm font-bold truncate">{isCustomWord ? "Manual" : (selectedCategory === 'MIX_ALL' ? "Mix" : selectedCategory)}</span>
                                                         </button>
                                                     </div>
                                                 </div>
-
                                                 <div className="bg-slate-100 rounded-2xl p-3 flex items-center justify-between">
                                                     <div className="flex items-center gap-3">
-                                                        <div className={`p-2 rounded-xl ${useHints ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-200 text-slate-400'}`}>
-                                                            <Icons.Bulb size={24} />
-                                                        </div>
-                                                        <div className="text-left">
-                                                            <p className="font-bold text-slate-700 text-sm">Pistas para Impostor</p>
-                                                            <p className="text-xs text-slate-400">{useHints ? 'Ayuda activada' : 'Modo difícil (Sin pistas)'}</p>
-                                                        </div>
+                                                        <div className={`p-2 rounded-xl ${useHints ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-200 text-slate-400'}`}><Icons.Bulb size={24} /></div>
+                                                        <div className="text-left"><p className="font-bold text-slate-700 text-sm">Pistas para Impostor</p><p className="text-xs text-slate-400">{useHints ? 'Ayuda activada' : 'Modo difícil (Sin pistas)'}</p></div>
                                                     </div>
-                                                    <div 
-                                                        onClick={() => setUseHints(!useHints)}
-                                                        className={`w-12 h-7 rounded-full p-1 cursor-pointer transition-colors duration-300 ${useHints ? 'bg-indigo-500' : 'bg-slate-300'}`}
-                                                    >
-                                                        <div className={`bg-white w-5 h-5 rounded-full shadow-md transform duration-300 ${useHints ? 'translate-x-5' : ''}`}></div>
-                                                    </div>
+                                                    <div onClick={() => setUseHints(!useHints)} className={`w-12 h-7 rounded-full p-1 cursor-pointer transition-colors duration-300 ${useHints ? 'bg-indigo-500' : 'bg-slate-300'}`}><div className={`bg-white w-5 h-5 rounded-full shadow-md transform duration-300 ${useHints ? 'translate-x-5' : ''}`}></div></div>
                                                 </div>
-
                                                 <hr className="border-slate-100" />
                                                 <div>
                                                     <div className="flex p-1 bg-slate-100 rounded-xl mb-4">
                                                         <button onClick={() => setIsCustomWord(false)} className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${!isCustomWord ? 'bg-white text-indigo-700 shadow-sm' : 'text-slate-500'}`}>Categorías</button>
                                                         <button onClick={() => setIsCustomWord(true)} className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${isCustomWord ? 'bg-white text-indigo-700 shadow-sm' : 'text-slate-500'}`}>Personalizada</button>
                                                     </div>
-                                                    {isCustomWord && (
-                                                        <div className="space-y-3 animate-fade-in">
-                                                            <input type="text" value={customWord} onChange={(e) => setCustomWord(e.target.value)} placeholder="Palabra Secreta" className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-center font-bold outline-none focus:ring-2 focus:ring-indigo-500" />
-                                                            <input type="text" value={customHint} onChange={(e) => setCustomHint(e.target.value)} placeholder="Pista para Impostor" className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-center text-sm outline-none focus:ring-2 focus:ring-indigo-500" />
-                                                        </div>
-                                                    )}
-                                                    {!isCustomWord && (
-                                                         <p className="text-center text-xs text-slate-400 mt-2">Toca el botón de arriba para cambiar de categoría</p>
-                                                    )}
+                                                    {isCustomWord && (<div className="space-y-3 animate-fade-in"><input type="text" value={customWord} onChange={(e) => setCustomWord(e.target.value)} placeholder="Palabra Secreta" className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-center font-bold outline-none focus:ring-2 focus:ring-indigo-500" /><input type="text" value={customHint} onChange={(e) => setCustomHint(e.target.value)} placeholder="Pista para Impostor" className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-center text-sm outline-none focus:ring-2 focus:ring-indigo-500" /></div>)}
+                                                    {!isCustomWord && (<p className="text-center text-xs text-slate-400 mt-2">Toca el botón de arriba para cambiar de categoría</p>)}
                                                 </div>
                                             </div>
                                         </Card>
                                     </div>
-                                    
-                                    <div className="space-y-2 mt-auto pt-2 shrink-0">
-                                        <Button onClick={startGame} disabled={isCustomWord && !customWord}>¡Comenzar Partida!</Button>
-                                    </div>
+                                    <div className="space-y-2 mt-auto pt-2 shrink-0"><Button onClick={startGame} disabled={isCustomWord && !customWord}>¡Comenzar Partida!</Button></div>
                                 </div>
                             )
                         )}
 
                         {phase === 'pass' && (
                             <div className="flex flex-col h-full justify-between py-6 animate-fade-in mt-6">
-                                <div className="text-center pt-4">
-                                    <p className="text-slate-400 font-bold uppercase tracking-widest text-xs mb-2">TURNO DE</p>
-                                    <h2 className="text-4xl font-black text-slate-800 leading-tight px-4">{playerNames[currentPlayerIndex]}</h2>
-                                </div>
+                                <div className="text-center pt-4"><p className="text-slate-400 font-bold uppercase tracking-widest text-xs mb-2">TURNO DE</p><h2 className="text-4xl font-black text-slate-800 leading-tight px-4">{playerNames[currentPlayerIndex]}</h2></div>
                                 <div className="flex-1 flex flex-col items-center justify-center w-full">
                                     <Card className="flex flex-col items-center justify-center min-h-[300px] relative overflow-hidden">
                                         <div className={`absolute top-0 left-0 w-full h-2 ${isWordVisible ? (isCurrentImpostor ? 'bg-rose-500' : 'bg-indigo-500') : 'bg-slate-200'}`}></div>
@@ -581,12 +431,7 @@
                                                         <div className="w-20 h-20 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-6"><span className="text-4xl">🤫</span></div>
                                                         <h3 className="text-3xl font-black text-rose-500 mb-2">IMPOSTOR</h3>
                                                         <p className="text-sm text-rose-400 mb-4 font-bold">Tu misión: Engañar a todos</p>
-                                                        
-                                                        {useHints ? (
-                                                            <div className="bg-slate-50 rounded-xl p-4 border border-slate-100 mx-2"><p className="text-xs font-bold text-slate-400 uppercase">Tu pista</p><p className="text-lg font-bold text-slate-800">"{impostorHint}"</p></div>
-                                                        ) : (
-                                                            <div className="bg-rose-50 rounded-xl p-4 border border-rose-100 mx-2"><p className="text-xs font-bold text-rose-400 uppercase">MODO DIFÍCIL</p><p className="text-lg font-bold text-rose-800">Sin Pista</p></div>
-                                                        )}
+                                                        {useHints ? (<div className="bg-slate-50 rounded-xl p-4 border border-slate-100 mx-2"><p className="text-xs font-bold text-slate-400 uppercase">Tu pista</p><p className="text-lg font-bold text-slate-800">"{impostorHint}"</p></div>) : (<div className="bg-rose-50 rounded-xl p-4 border border-rose-100 mx-2"><p className="text-xs font-bold text-rose-400 uppercase">MODO DIFÍCIL</p><p className="text-lg font-bold text-rose-800">Sin Pista</p></div>)}
                                                     </>
                                                 ) : (
                                                     <>
@@ -598,41 +443,21 @@
                                                 )}
                                             </div>
                                         ) : (
-                                            <div className="flex flex-col items-center gap-6 cursor-pointer" onClick={() => setIsWordVisible(true)}>
-                                                <div className="bg-slate-100 p-6 rounded-full text-slate-400"><Icons.EyeOff size={48} /></div>
-                                                <p className="text-sm font-bold text-slate-400 uppercase animate-pulse">Toca para revelar</p>
-                                            </div>
+                                            <div className="flex flex-col items-center gap-6 cursor-pointer" onClick={() => setIsWordVisible(true)}><div className="bg-slate-100 p-6 rounded-full text-slate-400"><Icons.EyeOff size={48} /></div><p className="text-sm font-bold text-slate-400 uppercase animate-pulse">Toca para revelar</p></div>
                                         )}
                                     </Card>
                                 </div>
                                 <div className="space-y-3 pb-4">
-                                    {!isWordVisible ? <Button onClick={() => setIsWordVisible(true)}>Mostrar</Button> : 
-                                        <Button onClick={() => { setIsWordVisible(false); if (currentPlayerIndex + 1 < players) setCurrentPlayerIndex(p => p + 1); else setPhase('round'); }} variant={isCurrentImpostor ? "danger" : "primary"}>
-                                            {currentPlayerIndex + 1 < players ? <span>Pasar a <strong>{playerNames[currentPlayerIndex + 1]}</strong> <Icons.ArrowRight className="inline" size={18} /></span> : <span>¡Empezar a Jugar! <Icons.Play className="inline" size={18} /></span>}
-                                        </Button>
-                                    }
+                                    {!isWordVisible ? <Button onClick={() => setIsWordVisible(true)}>Mostrar</Button> : <Button onClick={() => { setIsWordVisible(false); if (currentPlayerIndex + 1 < players) setCurrentPlayerIndex(p => p + 1); else setPhase('round'); }} variant={isCurrentImpostor ? "danger" : "primary"}>{currentPlayerIndex + 1 < players ? <span>Pasar a <strong>{playerNames[currentPlayerIndex + 1]}</strong> <Icons.ArrowRight className="inline" size={18} /></span> : <span>¡Empezar a Jugar! <Icons.Play className="inline" size={18} /></span>}</Button>}
                                 </div>
                             </div>
                         )}
 
                         {phase === 'round' && (
                             <div className="flex flex-col h-full py-6 animate-fade-in mt-6">
-                                {/* Banner de Publicidad Superior */}
                                 <AdBlock type="banner" label="BANNER SUPERIOR" />
-                                
-                                <div className="text-center mt-6 mb-8">
-                                    <span className="bg-green-100 text-green-700 font-bold px-4 py-1 rounded-full text-sm uppercase">En juego</span>
-                                    <h2 className="text-3xl font-black text-slate-800 mt-4">Debate Abierto</h2>
-                                </div>
-                                
-                                <div className="bg-orange-50 border-2 border-orange-100 rounded-2xl p-6 text-center mx-4 mb-6 shadow-sm">
-                                    <p className="text-xs font-bold text-orange-400 uppercase mb-2 tracking-widest">Empieza Hablando</p>
-                                    <div className="flex items-center justify-center gap-2">
-                                        <Icons.Message className="text-orange-500" size={24} />
-                                        <h3 className="text-2xl font-black text-slate-800">{playerNames[starterIndex]}</h3>
-                                    </div>
-                                </div>
-
+                                <div className="text-center mt-6 mb-8"><span className="bg-green-100 text-green-700 font-bold px-4 py-1 rounded-full text-sm uppercase">En juego</span><h2 className="text-3xl font-black text-slate-800 mt-4">Debate Abierto</h2></div>
+                                <div className="bg-orange-50 border-2 border-orange-100 rounded-2xl p-6 text-center mx-4 mb-6 shadow-sm"><p className="text-xs font-bold text-orange-400 uppercase mb-2 tracking-widest">Empieza Hablando</p><div className="flex items-center justify-center gap-2"><Icons.Message className="text-orange-500" size={24} /><h3 className="text-2xl font-black text-slate-800">{playerNames[starterIndex]}</h3></div></div>
                                 <div className="mt-auto"><Button onClick={() => setPhase('result')} className="bg-slate-800 hover:bg-slate-900 text-white">🕵️ Revelar Impostores</Button></div>
                             </div>
                         )}
@@ -640,31 +465,15 @@
                         {phase === 'result' && (
                             <div className="flex flex-col h-full items-center justify-center py-8 text-center animate-fade-in space-y-8 mt-6">
                                 <div><h2 className="text-4xl font-black text-slate-800 mb-2">Fin de la Partida</h2></div>
-                                
-                                {/* Anuncio Grande en Resultados */}
                                 <AdBlock type="rectangle" label="RECTÁNGULO GRANDE" />
-
                                 <div className="w-full space-y-4 px-4">
                                     <div className="bg-white p-6 rounded-2xl shadow-lg border-l-8 border-rose-500 w-full text-left">
                                         <p className="text-xs font-bold text-slate-400 uppercase">{realImpostorCount > 1 ? "Los Impostores eran" : "El Impostor era"}</p>
-                                        <div className="flex flex-col gap-2 mt-2">
-                                            {impostorIndices.map(idx => (
-                                                <div key={idx} className="flex items-center gap-3">
-                                                    <span className="text-2xl">🤫</span>
-                                                    <p className="text-2xl font-black text-rose-500">{playerNames[idx]}</p>
-                                                </div>
-                                            ))}
-                                        </div>
+                                        <div className="flex flex-col gap-2 mt-2">{impostorIndices.map(idx => (<div key={idx} className="flex items-center gap-3"><span className="text-2xl">🤫</span><p className="text-2xl font-black text-rose-500">{playerNames[idx]}</p></div>))}</div>
                                     </div>
-                                    <div className="bg-white p-6 rounded-2xl shadow-lg border-l-8 border-indigo-500 w-full text-left">
-                                        <p className="text-xs font-bold text-slate-400 uppercase">La palabra era</p>
-                                        <div className="flex items-center gap-3"><span className="text-3xl">📝</span><p className="text-3xl font-black text-indigo-600">{secretWord}</p></div>
-                                    </div>
+                                    <div className="bg-white p-6 rounded-2xl shadow-lg border-l-8 border-indigo-500 w-full text-left"><p className="text-xs font-bold text-slate-400 uppercase">La palabra era</p><div className="flex items-center gap-3"><span className="text-3xl">📝</span><p className="text-3xl font-black text-indigo-600">{secretWord}</p></div></div>
                                 </div>
-                                <div className="w-full space-y-3 pt-4 mt-auto">
-                                    <Button onClick={() => setPhase('setup')}><Icons.RotateCcw size={20} /> Jugar Otra Vez</Button>
-                                    <Button variant="ghost" onClick={() => setPhase('home')}>Volver al Menú</Button>
-                                </div>
+                                <div className="w-full space-y-3 pt-4 mt-auto"><Button onClick={() => setPhase('setup')}><Icons.RotateCcw size={20} /> Jugar Otra Vez</Button><Button variant="ghost" onClick={() => setPhase('home')}>Volver al Menú</Button></div>
                             </div>
                         )}
                     </div>
